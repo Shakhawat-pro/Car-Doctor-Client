@@ -1,7 +1,7 @@
 import FooterLogo from "../../../assets/FooterLogo.png"
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-black text-white ">
+        <footer className="footer p-10 bg-black text-white h-full mt-20">
             <aside>
                 <img src={FooterLogo} alt="" />
                 <p>Car Docter Ltd.<br />Providing reliable tech since 1992</p>
