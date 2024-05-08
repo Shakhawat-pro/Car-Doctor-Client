@@ -21,7 +21,7 @@ const NavBar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <Link to="/"><a className="btn btn-ghost text-xl"><img src={logo}></img></a></Link>
+                    <Link to="/"><p className="btn btn-ghost hover:bg-transparent text-xl"><img src={logo}></img></p></Link>
                     
                 </div>
                 <div className="navbar-center hidden lg:flex">

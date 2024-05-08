@@ -4,7 +4,7 @@ const Footer = () => {
         <footer className="footer p-10 bg-black text-white h-full mt-20">
             <aside>
                 <img src={FooterLogo} alt="" />
-                <p>Car Docter Ltd.<br />Providing reliable tech since 1992</p>
+                <p>Car Doctor Ltd.<br />Providing reliable tech since 1992</p>
             </aside>
             <nav>
                 <h6 className="footer-title">Services</h6>
@@ -27,7 +27,7 @@ const Footer = () => {
                 <a className="link link-hover">Cookie policy</a>
             </nav>
         </footer>
-    );
-};
+    )
+}
 
 export default Footer;
