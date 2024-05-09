@@ -1,16 +1,26 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.svg"
 import "./NavStyles.css"
+import { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthProvider";
 const NavBar = () => {
+    const {user, logOut} = useContext((AuthContext))
+    const handleLogOut = () =>{
+        logOut()
+    }
+
     const navItems = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/About">About</NavLink></li>
         <li><NavLink to="/services">Services</NavLink></li>
         <li><NavLink to="/blog">Blog</NavLink></li>
         <li><NavLink to="/contact">Contact</NavLink></li>
+        {
+            user?.email && <li><NavLink to="/bookings">Booking</NavLink></li>
+        }
     </>
     return (
-        <div className="container mx-auto">
+        <div className="lg:container mx-auto">
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -29,7 +39,11 @@ const NavBar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end space-x-4">
+                    {user?  <button onClick={handleLogOut}  className="btn bg-transparent border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white">Log Out</button>
+                          :<Link to="/login"><button className="btn bg-transparent border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white">LogIn</button></Link>
+
+                     }
                     <a className="btn bg-transparent border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white">Appointment</a>
                 </div>
             </div>
