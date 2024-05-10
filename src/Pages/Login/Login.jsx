@@ -1,22 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
+import axios from "axios";
 const Login = () => {
-    const {signInUser} = useContext(AuthContext)
-    const handleLogin =e => {
+    const { signInUser } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
+    const handleLogin = e => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
         console.log('Login', email, password);
-        
+
         signInUser(email, password)
-        .then(result =>{
-            console.log("Login",result.user);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(result => {
+                const loggedInUser = result.user
+                console.log("Login", loggedInUser);
+                const user = { email }
+                // get access token
+
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location?.state : '/')
+                        }
+                    })
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
     return (
@@ -50,7 +66,7 @@ const Login = () => {
                         </form>
                         <h1 className="text-center font-medium">Or Sign In with</h1>
                         <div>
-                            
+
                         </div>
                         <h1 className="text-center mb-5">New to Car Doctor? <Link to='/signUp' className="text-[#FF3811] font-semibold hover:underline">Sign Up</Link></h1>
                     </div>
